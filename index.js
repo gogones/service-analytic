@@ -13,7 +13,6 @@ app.use(bodyParser.json())
 
 const Webhook = new Webhooks
 
-const router = express.Router()
 
 // route webhooks
 app.post('/webhooks', async (req, res) => {
@@ -24,11 +23,15 @@ app.post('/webhooks', async (req, res) => {
         store.set("data", [...getStorage, req.body])
     }
 
-    res.json(req.body)
+    res.send(req.body)
+})
+
+app.get("/", (req, res) => {
+    res.send({ name:" respati"})
 })
 
 app.get("/getList", (req, res) => {
-    res.json(store.get('data'))
+    res.send(store.get('data'))
 })
 
 // app.use('/.netlify/functions/api', router);
