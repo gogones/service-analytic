@@ -2,16 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
 
-const Webhooks  = require('./models/webhooks');
-const ServerlessHttp = require('serverless-http');
 const store = require('store');
 
 const app = express()
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use(bodyParser.json())
-
-const Webhook = new Webhooks
 
 
 // route webhooks
@@ -23,19 +19,18 @@ app.post('/webhooks', async (req, res) => {
         store.set("data", [...getStorage, req.body])
     }
 
-    res.send(req.body)
+    return res.send(req.body)
 })
 
 app.get("/", (req, res) => {
-    res.send("datangg dan pergi itu wajar")
+    return res.send("datangg dan pergi itu wajar")
 })
 
 app.get("/getList", (req, res) => {
-    res.send(store.get('data'))
+    return res.send(store.get('data'))
 })
 
-// app.use('/.netlify/functions/api', router);
 
-app.listen(3000)
-
-// module.exports.handler = ServerlessHttp(app);
+app.listen(3000, () => {
+    console.log(":masiu")
+})
