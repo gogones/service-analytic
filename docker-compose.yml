@@ -1,0 +1,34 @@
+version: "3.0"
+
+services:
+  analytic-service:
+    image: analytic-service
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports: 
+      - "9000:9000"
+    depends_on: 
+      -  postgresql
+    restart: on-failure:5 
+
+  postgresql:
+    image: postgres
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_PASSWORD: "postgresql"
+      POSTGRES_DB: "service-analytic"
+      POSTGRES_USER: "admin"
+    volumes:
+      - analytic-service-volume
+    networks:
+      - analytic-service-networks
+    restart: on-failure:5 
+
+volumes:
+  analytic-service-volume:
+
+networks:
+  analytic-service-networks:
+    
