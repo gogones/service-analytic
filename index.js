@@ -31,6 +31,4 @@ app.get("/getList", (req, res) => {
 })
 
 
-app.listen(3000, () => {
-    console.log(":masiu")
-})
+app.listen(3000)
