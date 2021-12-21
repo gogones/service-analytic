@@ -8,10 +8,9 @@
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "pg": "^8.7.1",
+    "serverless-http": "^2.7.0",
+    "store": "^2.0.12",
     "typeorm": "^0.2.41"
-  },
-  "scripts": {
-    "start": "nodemon app.ts"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
