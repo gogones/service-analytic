@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
 
-const Webhooks  = require('../models/webhooks');
+const Webhooks  = require('./models/webhooks');
 const ServerlessHttp = require('serverless-http');
 const store = require('store');
 
@@ -16,7 +16,7 @@ const Webhook = new Webhooks
 const router = express.Router()
 
 // route webhooks
-router.post('/webhooks', async (req, res) => {
+app.post('/webhooks', async (req, res) => {
     const getStorage = store.get('data');
     if(!getStorage) {
         store.set("data", [...new Array(), req.body])
@@ -27,10 +27,12 @@ router.post('/webhooks', async (req, res) => {
     res.json(req.body)
 })
 
-router.get("/getList", (req, res) => {
+app.get("/getList", (req, res) => {
     res.json(store.get('data'))
 })
 
-app.use('/.netlify/functions/api', router);
+// app.use('/.netlify/functions/api', router);
 
-module.exports.handler = ServerlessHttp(app);
+app.listen(3000)
+
+// module.exports.handler = ServerlessHttp(app);
