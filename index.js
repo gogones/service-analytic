@@ -27,7 +27,7 @@ app.post('/webhooks', async (req, res) => {
 })
 
 app.get("/", (req, res) => {
-    res.send({ name:" respati"})
+    res.send("datangg dan pergi itu wajar")
 })
 
 app.get("/getList", (req, res) => {
